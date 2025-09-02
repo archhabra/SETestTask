@@ -22,7 +22,7 @@ std::vector<std::string> Database::getCategories() {
         sqlite3_finalize(stmt);
         stmt = nullptr;
     }
-    close();
+    // close(); // Avoid closing DB here; destructor will handle it
     return categories;
 }
 
@@ -42,7 +42,7 @@ std::vector<std::string> Database::getBrands() {
         sqlite3_finalize(stmt);
         stmt = nullptr;
     }
-    close();
+    // close(); // Avoid closing DB here; destructor will handle it
     return brands;
 }
 
@@ -96,7 +96,6 @@ std::vector<Product> Database::searchProducts(const std::string& query) {
         }
         sqlite3_finalize(stmt);
     }
-    close();
     return products;
 }
 
@@ -273,7 +272,6 @@ std::vector<Product> Database::getAllProducts() {
         sqlite3_finalize(stmt);
         stmt = nullptr;
     }
-    close();
     return products;
 }
 
@@ -317,7 +315,6 @@ crow::json::wvalue Database::getFilters() {
         sqlite3_finalize(stmt);
     }
 
-    close();
     return filters;
 }
 
@@ -342,7 +339,6 @@ std::vector<std::string> Database::getSuggestions(const std::string& query) {
         sqlite3_finalize(stmt);
         stmt = nullptr;
     }
-    close();
     return suggestions;
 }
 
